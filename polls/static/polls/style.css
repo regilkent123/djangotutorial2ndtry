@@ -1,7 +1,50 @@
 li a{
-	color: green;
+	font-size: 24px;
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
 }
 
 body {
-	background: white url("images/background.gif") no-repeat;
+	background: white url("images/source.gif");
+	 background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+div.background{
+	margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    width: 90%;
+}
+
+div.comment{
+	margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    width: 90%;
+
+}
+
+
+h1{
+	color: black;
+}
+
+div.box{
+	position: absolute;
+	left: 40px;
+}
+
+textarea.comment{
+   resize: none;
+   font-size: 18px;
+}
+
+h1.question{
+    position: relative;
+    left: 40px;
 }

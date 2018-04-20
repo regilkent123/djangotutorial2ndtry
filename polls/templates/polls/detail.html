@@ -1,12 +1,26 @@
-<h1>{{ question.question_text }}</h1>
+{%load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<div class="comment" >
+<h1 class = "question">{{ question.question_text }}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
+<div class="choice">
 {% for choice in question.choice_set.all %}
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
-<input type="submit" value="Vote" />
+</div>
+<h2>Comments section:</h2>
+{% for comment in question.comment_set.all %}
+    <li><label for="comment{{ forloop.counter }}">{{ comment.comment_text }}</label></li>
+{% endfor %}
+</div>
+<div class="box">
+<textarea name="comment" class="comment" placeholder="Comment here..."></textarea>
+<br> 
+<input type="submit" value="Submit" />
+</div>
 </form>

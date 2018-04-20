@@ -19,7 +19,12 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
+
+class Comment(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    comment_text = models.TextField()
+    def __str__(self):
+        return self.comment_text
 # Create your models here.
