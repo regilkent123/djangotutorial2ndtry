@@ -35,20 +35,15 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-        comments = question.comment_set.all()
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
     else:
         selected_choice.votes += 1
-        comments.comment_text = request.POST.get('comment')
-        comments.save()
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+        question.comment_set.create(comment_text=request.POST['comment'])
+        question.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 # Create your views here.
