@@ -35,6 +35,7 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        comments = request.POST['comment']
     except (KeyError, Choice.DoesNotExist):
         return render(request, 'polls/detail.html', {
             'question': question,
@@ -43,7 +44,8 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        question.comment_set.create(comment_text=request.POST['comment'])
-        question.save()
+        if comments is not "":
+            question.comment_set.create(comment_text=request.POST['comment'])
+            question.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 # Create your views here.
