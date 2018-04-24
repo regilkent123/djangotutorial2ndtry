@@ -13,14 +13,16 @@
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
 </div>
+
 <h2>Comments section:</h2>
 {% for comment in question.comment_set.all %}
     <li><label for="comment{{ forloop.counter }}">{{ comment.comment_text }}</label></li>
 {% endfor %}
 </div>
+
 <div class="box">
-<textarea name="comment" class="comment" placeholder="Comment here..."></textarea>
-<br> 
+<textarea name="comment" class="comment" id = "comment{{forloop.counter}}" placeholder="Comment here..."></textarea>
+<br>
 <input type="submit" value="Submit" />
 </div>
 </form>
